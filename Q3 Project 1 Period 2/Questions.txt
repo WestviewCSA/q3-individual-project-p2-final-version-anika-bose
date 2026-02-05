@@ -12,6 +12,13 @@ o How long should we work on this project
 c Is this project in the lab category
 o What is the best way to calculate the optimal path?
 o What if the maze cannot be solved
+c What day do we start working on this project
+c Should we add this project to our personal computers at home
+c Are we going to get class time to work on this project
+c Do we have to design our own UI for this project
+c how muhc of this project is okay to complete with a partner
+o What coding stuff will we need to use in this project to make it easier
+
 
  I could reword "how long should we work on this project" to say approximately how much time have past 
  students needed to complete the project
