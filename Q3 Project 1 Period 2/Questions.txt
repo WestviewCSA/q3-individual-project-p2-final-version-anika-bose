@@ -2,11 +2,19 @@ Questions:
 
 Write as many questions as you can based on the project specs.
 
-When is this due?
-Can I work with a partner?
-Why do we have a month to do the design plan
-Do I have to do this at home :(
-Is this homework :(((
-how much of my grade is this    
+c When is this due?
+c Can I work with a partner?
+o Why do we have a month to do the design plan
+c Do I have to do this at home :(
+c Is this homework :(((
+c how much of my grade is this    
+o How long should we work on this project
+c Is this project in the lab category
+o What is the best way to calculate the optimal path?
+o What if the maze cannot be solved
 
-  
+ I could reword "how long should we work on this project" to say approximately how much time have past 
+ students needed to complete the project
+ 
+ What if the maze cannot be solved? could be reworded to what should the code output if there is no 
+ solution to the maze
