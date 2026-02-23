@@ -28,7 +28,7 @@ public class ReadMap {
 			*/
 			int rows = scanner.nextInt();
 			int cols = scanner.nextInt();
-			int rooms = scanner.nextInt();
+			int rooms = scanner.nextInt(); 
 			
 				String[][] map = new String[rows*rooms][cols];
 				for(int r = 0; r<map.length; r++) {
