@@ -4,11 +4,11 @@ import java.util.Scanner;
 			
 public class ReadMap {
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) throws ReadMap.IllegalCommandLineInputsException {		
 			ReadMap m = new ReadMap("medMap2");
 	}
 
-	public ReadMap(String name) {
+	public ReadMap(String name) throws ReadMap.IllegalCommandLineInputsException {
 		readFile("easyMap1");
 		readFile("medMap2");
 		
@@ -16,21 +16,28 @@ public class ReadMap {
 
 	}
 
-	public void readFile(String name) {
+	public void readFile(String name) throws ReadMap.IllegalCommandLineInputsException {
 		try {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
-		/*	for(int i = 0; i<3; i++) {
+			int rows =0;
+			int cols= 0;
+			int rooms= 0; 
+			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
-					System.out.println("Invalid Map");
-					return;
+				  throw new IllegalCommandLineInputsException("Invalid Map");
+				
 				}
-				scanner.nextInt();
+				if(i == 0) {
+					rows = scanner.nextInt();
+				}
+				else if(i==1) {
+					cols = scanner.nextInt();
+				}else {
+					rooms = scanner.nextInt();
+				}
 			}
-			*/
-			int rows = scanner.nextInt();
-			int cols = scanner.nextInt();
-			int rooms = scanner.nextInt(); 
+
 			
 				String[][] map = new String[rows*rooms][cols];
 				for(int r = 0; r<map.length; r++) {
@@ -54,29 +61,41 @@ public class ReadMap {
 		}
 	}
 	
-	public void readCoordinate(String name) {
+	public void readCoordinate(String name) throws ReadMap.IllegalCommandLineInputsException {
 		try {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
-		/*	for(int i = 0; i<3; i++) {
+			
+			
+
+			int rows =0;
+			int cols= 0;
+			int rooms= 0; 
+			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
-					System.out.println("Invalid Map");
-					return;
+					throw new IllegalCommandLineInputsException("Invalid Map");
 				}
-				scanner.nextInt();
+				if(i == 0) {
+					rows = scanner.nextInt();
+				}
+				else if(i==1) {
+					cols = scanner.nextInt();
+				}else {
+					rooms = scanner.nextInt();
+				}
 			}
-			*/
-			int rows = scanner.nextInt();
-			int cols = scanner.nextInt();
-			int rooms = scanner.nextInt(); 
-			System.out.println(rows + " " + cols + " " + rooms);
+
+
 			String[][] map = new String[rows*rooms][cols];
 			while(scanner.hasNext()) {
 				String str = scanner.next();
 				int r = scanner.nextInt();
 				int c = scanner.nextInt();
 				int l = scanner.nextInt();
-				map[r+ (r*l)][c] = str;
+				if((r+(r*l))<map.length && c<map[0].length) {
+					map[r+ (r*l)][c] = str;
+				}
+			
 				
 			}
 			
@@ -97,5 +116,16 @@ public class ReadMap {
 			e.printStackTrace();
 		}
 	}
+
+	
+	
+	//exceptions
+	
+	public class IllegalCommandLineInputsException extends Exception {
+	    public IllegalCommandLineInputsException(String message) {
+	        super(message); 
+	    }
+	}
+
 
 }
