@@ -4,11 +4,11 @@ import java.util.Scanner;
 			
 public class ReadMap {
 
-	public static void main(String[] args) throws ReadMap.IllegalCommandLineInputsException {		
+	public static void main(String[] args) throws ReadMap.IllegalFirstLineException {		
 			ReadMap m = new ReadMap("medMap2");
 	}
 
-	public ReadMap(String name) throws ReadMap.IllegalCommandLineInputsException {
+	public ReadMap(String name) throws ReadMap.IllegalFirstLineException {
 		readFile("easyMap1");
 		readFile("medMap2");
 		
@@ -16,7 +16,7 @@ public class ReadMap {
 
 	}
 
-	public void readFile(String name) throws ReadMap.IllegalCommandLineInputsException {
+	public void readFile(String name) throws ReadMap.IllegalFirstLineException {
 		try {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
@@ -25,7 +25,7 @@ public class ReadMap {
 			int rooms= 0; 
 			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
-				  throw new IllegalCommandLineInputsException("Invalid Map");
+				  throw new IllegalFirstLineException("Invalid Map");
 				
 				}
 				if(i == 0) {
@@ -61,7 +61,7 @@ public class ReadMap {
 		}
 	}
 	
-	public void readCoordinate(String name) throws ReadMap.IllegalCommandLineInputsException {
+	public void readCoordinate(String name) throws ReadMap.IllegalFirstLineException {
 		try {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
@@ -73,7 +73,7 @@ public class ReadMap {
 			int rooms= 0; 
 			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
-					throw new IllegalCommandLineInputsException("Invalid Map");
+					throw new IllegalFirstLineException("Invalid Map");
 				}
 				if(i == 0) {
 					rows = scanner.nextInt();
@@ -121,8 +121,8 @@ public class ReadMap {
 	
 	//exceptions
 	
-	public class IllegalCommandLineInputsException extends Exception {
-	    public IllegalCommandLineInputsException(String message) {
+	public class IllegalFirstLineException extends Exception {
+	    public IllegalFirstLineException(String message) {
 	        super(message); 
 	    }
 	}
