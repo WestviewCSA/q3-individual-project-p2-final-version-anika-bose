@@ -1,12 +1,47 @@
 
-Week 1: Make sure I can push and commit changes to repository linked to GitHub classroom assignment. 
+Week 1 (2/23-2/27): Make sure I can push and commit changes to repository linked to GitHub classroom assignment. 
                Create easy/medium/hard maps showing some understanding of the maps
                Create easy/medium/hard coordinate-based maps showing understanding of the 2nd type of input files.
                Be able to read in data from map files
+                 - read using Scanner class
                Be able to store data from map files
-Week 2: Start writing code that works with Queue-based approach...
-               Start writing code that works with Stack-based approach... 
+                 - create 2d array based on the 3 numbers in the first line of the map
+                 - 2d array will be sized as [rooms*rows][cols]
+                 - using scanner class, store the data in a 2d array
+               Be able to store coordinate based map
+                 - create 2d array based on the 3 numbers in the first line of the map
+                 - 2d array will be sized as [rooms*rows][cols]
+                 - store each value as a string at the given coordinate 
+               Start Design Plan
+Week 2 (3/2 - 3/6): Start writing code that works with Queue-based approach...
+               Start writing code that works with Stack-based approach...
                
-               
-               
-               test
+               Notes:
+                  - Order: North, South, East, West
+                  - Queue based: first in, first out
+                       - enqueue the W coordinate
+                       - dequeue the W coordinate and enqueue all the coordinates in the given order
+                       - continue to dequeue, checking the next item in the queue until the $ is found
+                  - Stack based: last in, first out
+                       - push the W coordinate
+                       - pop the W coordinate and push all the coordinates in the given order
+                       - pop the coordinate added last and continue checking the last added item until the $ is found
+
+                   
+Week 3 (3/9-3/13): 
+				Write code for Exceptions
+                  - Illegal Command Line Inputs Exception
+                  	- missing command line argument
+                  - Illegal Map Character Exception
+                   	- illegal characters on map
+                  - Incomplete Map Exception
+                  	- not enough characters for a given map
+                  - Incorrect Map format Exception 
+                  	- incorrectly formatted maps
+				Write code for  errors
+				  - 
+				Write code for command line
+				  - watch video given on 2/25, implement command line code
+
+Week 3 (3/16-3/22): 
+               -3/22: Design Plan Due             
