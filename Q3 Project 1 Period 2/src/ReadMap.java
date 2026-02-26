@@ -7,9 +7,22 @@ public class ReadMap {
 	public static void main(String[] args) throws ReadMap.IllegalFirstLineException {		
 		
 		
-		if(args.length >0) {
-			System.out.println("yay");
+		if(args.length ==1) {
+			if(args[0] == "--Stack") {
+				
+				
+			}
+			if(args[0] == "--Queue") {
+				
+				
+			}
+			if(args[0] == "--Opt") {
+				
+			}
 		}
+		
+		
+		
 		
 		ReadMap m = new ReadMap("medMap2");
 			
