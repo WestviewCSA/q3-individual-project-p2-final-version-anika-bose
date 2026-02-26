@@ -38,10 +38,23 @@ Week 3 (3/9-3/13):
                   	- not enough characters for a given map
                   - Incorrect Map format Exception 
                   	- incorrectly formatted maps
-				Write code for  errors
-				  - 
+				Write code for  errors - should throw one of the above exceptions
+				  - text-map
+				  	- illegal characters
+				  	- incomplete maps
+				  	- files without 3 positive numbers in first line
+				  - coordinate based
+				    - illegal characters in first column
+				    - coordxinates that don't fit inside maze (just dont add?)
+				    - files that don't start with 3 positive numbers
+				  - command line: not having exactly one of the --stack --queue --opt switches set
 				Write code for command line
 				  - watch video given on 2/25, implement command line code
 
 Week 3 (3/16-3/22): 
+               - add testing
+               	 - at least 10 test cases, but 5 test mazes
+               	 - store in a subdirectory called TEST
+               	 - each test shuld be named test[number] between 01 and 05
+               - work on runtime evaluation
                -3/22: Design Plan Due             

@@ -5,7 +5,16 @@ import java.util.Scanner;
 public class ReadMap {
 
 	public static void main(String[] args) throws ReadMap.IllegalFirstLineException {		
-			ReadMap m = new ReadMap("medMap2");
+		
+		
+		if(args.length >0) {
+			System.out.println("yay");
+		}
+		
+		ReadMap m = new ReadMap("medMap2");
+			
+			
+			
 	}
 
 	public ReadMap(String name) throws ReadMap.IllegalFirstLineException {
