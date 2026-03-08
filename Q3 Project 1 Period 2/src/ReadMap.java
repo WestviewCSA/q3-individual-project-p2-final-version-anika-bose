@@ -3,6 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 			
 public class ReadMap {
+	private String[][] map;
+	private int rows;
+	private int cols;
+	private int rooms;
 
 	public static void main(String[] args) throws ReadMap.IllegalFirstLineException {		
 		
@@ -30,11 +34,12 @@ public class ReadMap {
 			
 	}
 
-	public ReadMap(String name) throws ReadMap.IllegalFirstLineException {
-		readFile("easyMap1");
-		readFile("medMap2");
-		
-		readCoordinate("easyMap1c");
+	public ReadMap(String filename) throws ReadMap.IllegalFirstLineException {
+        if (filename.endsWith("c")) {
+            readCoordinate(filename);
+        } else {
+            readFile(filename);
+        }
 
 	}
 
