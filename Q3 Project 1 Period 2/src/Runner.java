@@ -25,6 +25,25 @@ public class Runner {
 		return null;
     }
     
+    public void queue()  {
+    	int[] start = findStart();
+    	if(start == null) {
+    		System.out.println("No start");
+    		return;
+    	}
+    	
+    	boolean[][] visited = new boolean[map.length][map[0].length];
+    	
+    	
+    
+    }
+    
+    public void stack() {
+    	
+ 
+    	
+    }
+    
     
     
     
