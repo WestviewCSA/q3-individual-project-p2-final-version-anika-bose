@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Runner {
 	private String[][] map;
@@ -33,7 +35,15 @@ public class Runner {
     	}
     	
     	boolean[][] visited = new boolean[map.length][map[0].length];
-    	
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(start);
+        visited[start[0]][start[1]] = true;
+        
+        
+        boolean found = false;
+        int steps = 0;
+        
+        
     	
     
     }
@@ -43,6 +53,22 @@ public class Runner {
  
     	
     }
+    
+    
+    private boolean isValid(int r, int c, boolean[][] visited) {
+        if (r < 0 || r >= map.length || c < 0 || c >= map[0].length) {
+        	return false;
+        }
+        if (visited[r][c]) {
+        	return false;
+        }
+        String cell = map[r][c];
+        if (cell == null) {
+        	return false;
+        }
+        return !cell.equals("#");
+    }
+ 
     
     
     
