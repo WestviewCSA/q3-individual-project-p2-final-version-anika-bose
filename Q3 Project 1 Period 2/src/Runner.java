@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Runner {
 	private String[][] map;
@@ -49,8 +50,21 @@ public class Runner {
     }
     
     public void stack() {
-    	
- 
+        int[] start = findStart();
+      	if(start == null) {
+    		System.out.println("No start");
+    		return;
+    	}
+      	
+      	boolean[][] visited = new boolean[map.length][map[0].length];
+      	
+        Stack<int[]> stack = new Stack<>();
+        stack.push(start);
+        visited[start[0]][start[1]] = true;
+        
+        
+        boolean found = false;
+        int steps = 0;
     	
     }
     
