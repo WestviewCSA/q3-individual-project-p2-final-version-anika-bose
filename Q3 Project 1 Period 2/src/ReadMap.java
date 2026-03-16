@@ -10,8 +10,7 @@ public class ReadMap {
 
 	
 
-    public ReadMap(String filename)
-    			throws MazeException.IllegalFirstLineException,
+    public ReadMap(String filename) throws MazeException.IllegalFirstLineException,
                    MazeException.IllegalMapCharacterException,
                    MazeException.IncompleteMapException {
         if (filename.endsWith("c")) {
@@ -22,7 +21,7 @@ public class ReadMap {
 
 	}
 
-	public void readFile(String name)   	throws MazeException.IllegalFirstLineException,
+	public void readFile(String name)  throws MazeException.IllegalFirstLineException,
 			MazeException.IllegalMapCharacterException,
 			MazeException.IncompleteMapException {
 		try {
