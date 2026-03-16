@@ -8,33 +8,12 @@ public class ReadMap {
 	private int cols;
 	private int rooms;
 
-	public static void main(String[] args) throws ReadMap.IllegalFirstLineException {		
-		
-		
-		if(args.length ==1) {
-			if(args[0] == "--Stack") {
-				
-				
-			}
-			if(args[0] == "--Queue") {
-				
-				
-			}
-			if(args[0] == "--Opt") {
-				
-			}
-		}
-		
-		
-		
-		
-		ReadMap m = new ReadMap("medMap2");
-			
-			
-			
-	}
+	
 
-	public ReadMap(String filename) throws ReadMap.IllegalFirstLineException {
+    public ReadMap(String filename)
+    			throws MazeException.IllegalFirstLineException,
+                   MazeException.IllegalMapCharacterException,
+                   MazeException.IncompleteMapException {
         if (filename.endsWith("c")) {
             readCoordinate(filename);
         } else {
@@ -43,7 +22,9 @@ public class ReadMap {
 
 	}
 
-	public void readFile(String name) throws ReadMap.IllegalFirstLineException {
+	public void readFile(String name)   	throws MazeException.IllegalFirstLineException,
+			MazeException.IllegalMapCharacterException,
+			MazeException.IncompleteMapException {
 		try {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
@@ -52,7 +33,7 @@ public class ReadMap {
 			int rooms= 0; 
 			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
-				  throw new IllegalFirstLineException("Invalid Map");
+				  throw new MazeException.IllegalFirstLineException("Invalid Map");
 				
 				}
 				if(i == 0) {
@@ -88,7 +69,7 @@ public class ReadMap {
 		}
 	}
 	
-	public void readCoordinate(String name) throws ReadMap.IllegalFirstLineException {
+	public void readCoordinate(String name) throws MazeException.IllegalFirstLineException {
 		try {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
@@ -100,7 +81,7 @@ public class ReadMap {
 			int rooms= 0; 
 			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
-					throw new IllegalFirstLineException("Invalid Map");
+					throw new MazeException.IllegalFirstLineException("Invalid Map");
 				}
 				if(i == 0) {
 					rows = scanner.nextInt();
@@ -144,15 +125,9 @@ public class ReadMap {
 		}
 	}
 
+
 	
 	
-	//exceptions
-	
-	public class IllegalFirstLineException extends Exception {
-	    public IllegalFirstLineException(String message) {
-	        super(message); 
-	    }
-	}
 
 
 }
