@@ -195,6 +195,9 @@ public class Solver {
         }
         return !cell.equals("#");
     }
+    
+    
+    
  
     
     
