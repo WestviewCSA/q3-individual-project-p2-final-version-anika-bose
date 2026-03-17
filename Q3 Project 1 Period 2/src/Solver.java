@@ -198,6 +198,21 @@ public class Solver {
     
     
     
+    
+    private void printMap() {
+    	for(int r = 0 ; r<map.length; r++) {
+    		for(int c=0; c<map[r].length; c++) {
+    			if(map[r][c] == null) {
+    				System.out.print(".");
+    			}
+    			else {
+    				System.out.print(map[r][c]);
+    			}
+    			System.out.println();
+    		}
+    	}
+    }
+    
  
     
     

@@ -125,8 +125,19 @@ public class ReadMap {
 	}
 
 
+	public String[][] getMap(){
+		return map;
+	}
 	
-	
+	public int getRows() {
+		return rows;
+	}
+	public int getCols() {
+		return cols;
+	}
+	public int getRooms() {
+		return rooms;
+	}
 
 
 }
