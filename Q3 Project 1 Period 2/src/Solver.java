@@ -45,8 +45,62 @@ public class Solver {
         boolean found = false;
         int steps = 0;
         
+
+        while (!queue.isEmpty()) {
+            int[] curr = queue.remove();
+            int r = curr[0];
+            int c = curr[1];
+        //north
+            if (r-1 >= 0 && map[r-1][c] != null) {
+                if (map[r-1][c].equals("$")) {
+                	found = true; 
+                	break; 
+                }
+                if (map[r-1][c].equals(".")) {
+                    map[r-1][c] = "+";
+                    queue.add(new int[]{r-1, c});
+                }
+            }
+       //south
+            if (r+1 < map.length && map[r+1][c] != null) {
+                if (map[r+1][c].equals("$")) { 
+                	found = true; 
+                	break; 
+                }
+                if (map[r+1][c].equals(".")) {
+                    map[r+1][c] = "+";
+                    queue.add(new int[]{r+1, c});
+                }
+            }
+            // east
+            if (c+1 < map[r].length && map[r][c+1] != null) {
+                if (map[r][c+1].equals("$")) {
+                	found = true; 
+                	break; 
+                }
+                if (map[r][c+1].equals(".")) {
+                    map[r][c+1] = "+";
+                    queue.add(new int[]{r, c+1});
+                }
+            }
+            // west
+            if (c-1 >= 0 && map[r][c-1] != null) {
+                if (map[r][c-1].equals("$")) { 
+                	found = true; 
+                	break; 
+                }
+                if (map[r][c-1].equals(".")) {
+                    map[r][c-1] = "+";
+                    queue.add(new int[]{r, c-1});
+                }
+            }
+            
+            
+        }
         
-    	
+        if(found == false) {
+        	System.out.println("No path found");
+        }
     
     }
     
@@ -66,7 +120,65 @@ public class Solver {
         
         boolean found = false;
         int steps = 0;
-    	
+        
+      
+        
+        
+
+        while (!stack.isEmpty()) {
+            int[] curr = stack.pop();
+            int r = curr[0];
+            int c = curr[1];
+            
+            
+            
+     // north
+    
+        
+        if (r-1 >= 0 && map[r-1][c] != null) {
+            if (map[r-1][c].equals("$")) { 
+            	found = true; 
+            	break; 
+            }
+            if (map[r-1][c].equals(".")) {
+                map[r-1][c] = "+";
+                stack.push(new int[]{r-1, c});
+            }
+        }
+        // south
+        if (r+1 < map.length && map[r+1][c] != null) {
+            if (map[r+1][c].equals("$")) { 
+            	found = true; 
+            	break; 
+            }
+            if (map[r+1][c].equals(".")) {
+                map[r+1][c] = "+";
+                stack.push(new int[]{r+1, c});
+            }
+        }
+        // east
+        if (c+1 < map[r].length && map[r][c+1] != null) {
+            if (map[r][c+1].equals("$")) { 
+            	found = true; 
+            	break; 
+            }
+            if (map[r][c+1].equals(".")) {
+                map[r][c+1] = "+";
+                stack.push(new int[]{r, c+1});
+            }
+        }
+        // west
+        if (c-1 >= 0 && map[r][c-1] != null) {
+            if (map[r][c-1].equals("$")) { 
+            	found = true; 
+            	break; 
+            }
+            if (map[r][c-1].equals(".")) {
+                map[r][c-1] = "+";
+                stack.push(new int[]{r, c-1});
+            }
+        }
+        }
     }
     
     
