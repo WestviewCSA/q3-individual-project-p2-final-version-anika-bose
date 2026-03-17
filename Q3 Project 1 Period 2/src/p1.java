@@ -11,6 +11,7 @@ public class p1 {
 			Solver solver = new Solver( map.getMap(), map.getRows(), map.getCols(), map.getRooms());
 			
 			
+			solver.queue();
 			
 		} catch (MazeException.IllegalFirstLineException e) {
 			// TODO Auto-generated catch block

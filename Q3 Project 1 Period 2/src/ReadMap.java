@@ -18,7 +18,7 @@ public class ReadMap {
         } else {
             readFile(filename);
         }
-
+   
 	}
 
 	public void readFile(String name)  throws MazeException.IllegalFirstLineException,

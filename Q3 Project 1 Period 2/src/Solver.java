@@ -199,7 +199,7 @@ public class Solver {
     
     
     
-    private void printMap() {
+    public void printMap() {
     	for(int r = 0 ; r<map.length; r++) {
     		for(int c=0; c<map[r].length; c++) {
     			if(map[r][c] == null) {
