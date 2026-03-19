@@ -174,12 +174,13 @@ public class Solver {
             }
         }
         
+
+        
+        
+        
+        }
         if(found == false) {
         	System.out.println("No path found");
-        }
-        
-        
-        
         }
     }
     
@@ -194,8 +195,9 @@ public class Solver {
     			else {
     				System.out.print(map[r][c]);
     			}
-    			System.out.println();
+    			
     		}
+    		System.out.println();
     	}
     }
     

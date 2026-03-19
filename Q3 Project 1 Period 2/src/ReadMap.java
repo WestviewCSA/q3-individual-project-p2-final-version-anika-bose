@@ -8,7 +8,7 @@ public class ReadMap {
 	private int cols;
 	private int rooms;
 
-    private static final String LEGAL_CHARS = "W$#.";
+    private static final String LEGAL_CHARS = "W$#.|@";
 
 
     public ReadMap(String filename) throws MazeException.IllegalFirstLineException,
