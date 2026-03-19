@@ -19,11 +19,9 @@ public class Solver {
     public int[] findStart() {
     	for(int r = 0; r<map.length; r++) {
     		for(int c = 0; c<map[r].length; c++) {
-    			if(map[r][c].equals("W")) {
-    				int[] coordinate;
-    				coordinate = new int[] {r,c};
-    				return coordinate;
-    			}
+                if (map[r][c] != null && map[r][c].equals("W")) {
+                    return new int[]{r, c};
+                }
     		}
     	}
 		return null;
@@ -36,11 +34,8 @@ public class Solver {
     		return;
     	}
     	
-    	boolean[][] visited = new boolean[map.length][map[0].length];
         Queue<int[]> queue = new LinkedList<>();
         queue.add(start);
-        visited[start[0]][start[1]] = true;
-        
         
         boolean found = false;
         int steps = 0;
@@ -104,6 +99,11 @@ public class Solver {
     
     }
     
+    
+    
+    
+    
+    
     public void stack() {
         int[] start = findStart();
       	if(start == null) {
@@ -111,19 +111,14 @@ public class Solver {
     		return;
     	}
       	
-      	boolean[][] visited = new boolean[map.length][map[0].length];
+      	
       	
         Stack<int[]> stack = new Stack<>();
         stack.push(start);
-        visited[start[0]][start[1]] = true;
+    
         
         
         boolean found = false;
-        int steps = 0;
-        
-      
-        
-        
 
         while (!stack.isEmpty()) {
             int[] curr = stack.pop();
@@ -178,27 +173,18 @@ public class Solver {
                 stack.push(new int[]{r, c-1});
             }
         }
+        
+        if(found == false) {
+        	System.out.println("No path found");
+        }
+        
+        
+        
         }
     }
     
     
-    private boolean isValid(int r, int c, boolean[][] visited) {
-        if (r < 0 || r >= map.length || c < 0 || c >= map[0].length) {
-        	return false;
-        }
-        if (visited[r][c]) {
-        	return false;
-        }
-        String cell = map[r][c];
-        if (cell == null) {
-        	return false;
-        }
-        return !cell.equals("#");
-    }
-    
-    
-    
-    
+
     public void printMap() {
     	for(int r = 0 ; r<map.length; r++) {
     		for(int c=0; c<map[r].length; c++) {
