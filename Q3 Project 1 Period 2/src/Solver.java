@@ -200,7 +200,18 @@ public class Solver {
     }
     
  
-    
+    public void printCoordinateMap() {
+        System.out.println(rows + " " + cols + " " + rooms);
+        for (int r = 0; r < map.length; r++) {
+            for (int c = 0; c < map[r].length; c++) {
+                if (map[r][c] != null && !map[r][c].equals(".")) {
+                    int room = r / rows;
+                    int row  = r % rows;
+                    System.out.println(map[r][c] + " " + row + " " + c + " " + room);
+                }
+            }
+        }
+    }
     
     
     
