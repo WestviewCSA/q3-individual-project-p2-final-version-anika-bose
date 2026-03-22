@@ -38,15 +38,15 @@ public class p1 {
         
         for (int i=0; i<args.length-1; i++) {
             switch (args[i]) {
-                case "--stack":
+                case "--Stack":
                     useStack = true;
                     switchCount++;
                     break;
-                case "--queue":
+                case "--Queue":
                     useQueue = true;
                     switchCount++;
                     break;
-                case "--opt":
+                case "--Opt":
                     useOpt = true;
                     switchCount++;
                     break;

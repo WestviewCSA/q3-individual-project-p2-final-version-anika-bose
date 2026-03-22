@@ -30,6 +30,19 @@ public class Solver {
 		return null;
     }
     
+    public int[] findNextW(int currentRoom) {
+        int nextRoomStart = (currentRoom + 1) * rows;
+        int nextRoomEnd   = nextRoomStart + rows;
+        for (int r = nextRoomStart; r < nextRoomEnd && r < map.length; r++) {
+            for (int c = 0; c < map[r].length; c++) {
+                if (map[r][c] != null && map[r][c].equals("W")) {
+                    return new int[]{r, c};
+                }
+            }
+        }
+        return null;
+    }
+    
     public void queue()  {
     	int[] start = findStart();
     	if(start == null) {
@@ -37,7 +50,7 @@ public class Solver {
     		return;
     	}
     	
-        Queue<int[]> queue = new LinkedList<>();
+        Queue<int[]> queue = new LinkedList();
         queue.add(start);
         
         boolean found = false;
@@ -48,51 +61,72 @@ public class Solver {
             int[] curr = queue.remove();
             int r = curr[0];
             int c = curr[1];
+            
+            
+            if (map[r][c].equals("|")) {
+                int currentRoom = r / rows;
+                int[] nextW = findNextW(currentRoom);
+                if (nextW != null && map[nextW[0]][nextW[1]].equals("W")) {
+                    map[nextW[0]][nextW[1]] = "+";
+                    queue.add(nextW);
+                }
+                continue;
+            }
+            
+            
         //north
             if (r-1 >= 0 && map[r-1][c] != null) {
-                if (map[r-1][c].equals("$")) {
-                	found = true; 
-                	break; 
-                }
-                if (map[r-1][c].equals(".")|| map[r-1][c].equals("|")) {
+
+                if (map[r-1][c].equals(".")) {
                     map[r-1][c] = "+";
                     queue.add(new int[]{r-1, c});
                 }
+                else if (map[r-1][c].equals("|")) {
+                	queue.add(new int[]{r-1, c}); 
+                }
+            	
             }
        //south
             if (r+1 < map.length && map[r+1][c] != null) {
-                if (map[r+1][c].equals("$")) { 
-                	found = true; 
-                	break; 
-                }
-                if (map[r+1][c].equals(".")|| map[r+1][c].equals("|")) {
+   
+                if (map[r+1][c].equals(".")) {
                     map[r+1][c] = "+";
                     queue.add(new int[]{r+1, c});
+                }
+                else if (map[r+1][c].equals("|")) {
+                	queue.add(new int[]{r+1, c}); 
                 }
             }
             // east
             if (c+1 < map[r].length && map[r][c+1] != null) {
-                if (map[r][c+1].equals("$")) {
-                	found = true; 
-                	break; 
-                }
-                if (map[r][c+1].equals(".")|| map[r][c+1].equals("|")) {
+
+                if (map[r][c+1].equals(".")) {
                     map[r][c+1] = "+";
                     queue.add(new int[]{r, c+1});
+                }
+                else if (map[r][c+1].equals("|")) {
+                	queue.add(new int[]{r, c+1}); 
                 }
             }
             // west
             if (c-1 >= 0 && map[r][c-1] != null) {
-                if (map[r][c-1].equals("$")) { 
-                	found = true; 
-                	break; 
-                }
-                if (map[r][c-1].equals(".")|| map[r][c-1].equals("|")) {
+
+                if (map[r][c-1].equals(".")) {
                     map[r][c-1] = "+";
                     queue.add(new int[]{r, c-1});
                 }
+                else if (map[r][c-1].equals("|")) {
+                	queue.add(new int[]{r, c-1}); 
+                }
             }
-            
+            if ((r - 1 >= 0 && map[r-1][c] != null && map[r-1][c].equals("$")) ||
+                    (r + 1 < map.length && map[r+1][c] != null && map[r+1][c].equals("$")) ||
+                    (c + 1 < map[r].length && map[r][c+1] != null && map[r][c+1].equals("$")) ||
+                    (c - 1 >= 0 && map[r][c-1] != null && map[r][c-1].equals("$"))) {
+                    found = true;
+                    break;
+                }
+          
             
         }
         
@@ -128,56 +162,71 @@ public class Solver {
             int r = curr[0];
             int c = curr[1];
             
-            
+            if (map[r][c].equals("|")) {
+                int currentRoom = r / rows;
+                int[] nextW = findNextW(currentRoom);
+                if (nextW != null && map[nextW[0]][nextW[1]].equals("W")) {
+                    map[nextW[0]][nextW[1]] = "+";
+                    stack.push(nextW);
+                }
+                continue;
+            }
             
      // north
     
         
         if (r-1 >= 0 && map[r-1][c] != null) {
-            if (map[r-1][c].equals("$")) { 
-            	found = true; 
-            	break; 
-            }
-            if (map[r-1][c].equals(".")|| map[r-1][c].equals("|")) {
+
+            if (map[r-1][c].equals(".")) {
                 map[r-1][c] = "+";
                 stack.push(new int[]{r-1, c});
+            }
+            else if (map[r-1][c].equals("|")) {
+            	stack.push(new int[]{r-1, c}); 
             }
         }
         // south
         if (r+1 < map.length && map[r+1][c] != null) {
-            if (map[r+1][c].equals("$")) { 
-            	found = true; 
-            	break; 
-            }
-            if (map[r+1][c].equals(".")|| map[r+1][c].equals("|")) {
+
+            if (map[r+1][c].equals(".")) {
                 map[r+1][c] = "+";
                 stack.push(new int[]{r+1, c});
+            }
+            else if (map[r+1][c].equals("|")) {
+            	stack.push(new int[]{r+1, c}); 
             }
         }
         // east
         if (c+1 < map[r].length && map[r][c+1] != null) {
-            if (map[r][c+1].equals("$")) { 
-            	found = true; 
-            	break; 
-            }
-            if (map[r][c+1].equals(".")|| map[r][c+1].equals("|")) {
+
+
+            if (map[r][c+1].equals(".")) {
                 map[r][c+1] = "+";
                 stack.push(new int[]{r, c+1});
+            }
+            else if (map[r][c+1].equals("|")) {
+            	stack.push(new int[]{r, c+1}); 
             }
         }
         // west
         if (c-1 >= 0 && map[r][c-1] != null) {
-            if (map[r][c-1].equals("$")) { 
-            	found = true; 
-            	break; 
-            }
-            if (map[r][c-1].equals(".")|| map[r][c-1].equals("|")) {
+ 
+            if (map[r][c-1].equals(".")) {
                 map[r][c-1] = "+";
                 stack.push(new int[]{r, c-1});
             }
+            else if (map[r][c-1].equals("|")) {
+            	stack.push(new int[]{r, c-1}); 
+            }
         }
         
-
+        if ((r - 1 >= 0 && map[r-1][c] != null && map[r-1][c].equals("$")) ||
+                (r + 1 < map.length && map[r+1][c] != null && map[r+1][c].equals("$")) ||
+                (c + 1 < map[r].length && map[r][c+1] != null && map[r][c+1].equals("$")) ||
+                (c - 1 >= 0 && map[r][c-1] != null && map[r][c-1].equals("$"))) {
+                found = true;
+                break;
+            }
         
         
         
@@ -188,30 +237,12 @@ public class Solver {
     }
     
     
+    
+    
     public void opt() {
-        int[] start = findStart();
-        if (start == null) {
-            System.out.println("No start");
-            return;
-        }
- 
-        int totalRows = map.length;
-        int totalCols = map[0].length;
- 
-        int[][] previous = new int[totalRows][totalCols];
+    	stack();
         
-        
-        for (int r = 0; r < totalRows; r++) {
-            for (int c = 0; c < totalCols; c++) {
-                previous[r][c] = -1;
-            }
-        }
- 
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(start);       
-        previous[start[0]][start[1]] = start[0] * totalCols + start[1];
- 
-        boolean found = false;
+//i gave up :(   
 
     }
     

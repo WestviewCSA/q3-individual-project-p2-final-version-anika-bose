@@ -8,7 +8,7 @@ public class ReadMap {
 	private int cols;
 	private int rooms;
 
-    private static final String LEGAL_CHARS = "W$#.|@";
+    private static final String LEGAL_CHARS = "W$.|@";
 
 
     public ReadMap(String filename) throws MazeException.IllegalFirstLineException,
@@ -29,9 +29,7 @@ public class ReadMap {
 			File file = new File(name);
 			Scanner scanner = new Scanner(file);
 			
-			int rows =0;
-			int cols= 0;
-			int rooms= 0; 
+	 
 			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
 				  throw new MazeException.IllegalFirstLineException("Invalid first line");
@@ -54,6 +52,8 @@ public class ReadMap {
 	                }
 	            }
 				map = new String[rows * rooms][cols];
+			//	System.out.println("rows=" + rows + " cols=" + cols + " rooms=" + rooms);
+		//	System.out.println("map.length=" + map.length);
 
 				for(int r = 0; r<map.length; r++) {
 	                if (!scanner.hasNext()) {
@@ -91,9 +91,6 @@ public class ReadMap {
 			
 			
 
-			int rows =0;
-			int cols= 0;
-			int rooms= 0; 
 			for(int i = 0; i<3; i++) {
 				if(!scanner.hasNextInt()) {
 					throw new MazeException.IllegalFirstLineException("Invalid Map");
