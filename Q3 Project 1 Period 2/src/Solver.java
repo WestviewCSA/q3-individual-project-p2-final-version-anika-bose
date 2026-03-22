@@ -8,6 +8,9 @@ public class Solver {
     private int rows;
     private int cols;
     private int rooms;
+    private int[][] path;
+    private int pathLength;
+ 
     
     public Solver(String[][] paramMap, int paramRows, int paramCols, int paramRooms) {
     	map = paramMap;
@@ -38,7 +41,7 @@ public class Solver {
         queue.add(start);
         
         boolean found = false;
-        int steps = 0;
+  
         
 
         while (!queue.isEmpty()) {
@@ -51,7 +54,7 @@ public class Solver {
                 	found = true; 
                 	break; 
                 }
-                if (map[r-1][c].equals(".")) {
+                if (map[r-1][c].equals(".")|| map[r-1][c].equals("|")) {
                     map[r-1][c] = "+";
                     queue.add(new int[]{r-1, c});
                 }
@@ -62,7 +65,7 @@ public class Solver {
                 	found = true; 
                 	break; 
                 }
-                if (map[r+1][c].equals(".")) {
+                if (map[r+1][c].equals(".")|| map[r+1][c].equals("|")) {
                     map[r+1][c] = "+";
                     queue.add(new int[]{r+1, c});
                 }
@@ -73,7 +76,7 @@ public class Solver {
                 	found = true; 
                 	break; 
                 }
-                if (map[r][c+1].equals(".")) {
+                if (map[r][c+1].equals(".")|| map[r][c+1].equals("|")) {
                     map[r][c+1] = "+";
                     queue.add(new int[]{r, c+1});
                 }
@@ -84,7 +87,7 @@ public class Solver {
                 	found = true; 
                 	break; 
                 }
-                if (map[r][c-1].equals(".")) {
+                if (map[r][c-1].equals(".")|| map[r][c-1].equals("|")) {
                     map[r][c-1] = "+";
                     queue.add(new int[]{r, c-1});
                 }
@@ -135,7 +138,7 @@ public class Solver {
             	found = true; 
             	break; 
             }
-            if (map[r-1][c].equals(".")) {
+            if (map[r-1][c].equals(".")|| map[r-1][c].equals("|")) {
                 map[r-1][c] = "+";
                 stack.push(new int[]{r-1, c});
             }
@@ -146,7 +149,7 @@ public class Solver {
             	found = true; 
             	break; 
             }
-            if (map[r+1][c].equals(".")) {
+            if (map[r+1][c].equals(".")|| map[r+1][c].equals("|")) {
                 map[r+1][c] = "+";
                 stack.push(new int[]{r+1, c});
             }
@@ -157,7 +160,7 @@ public class Solver {
             	found = true; 
             	break; 
             }
-            if (map[r][c+1].equals(".")) {
+            if (map[r][c+1].equals(".")|| map[r][c+1].equals("|")) {
                 map[r][c+1] = "+";
                 stack.push(new int[]{r, c+1});
             }
@@ -168,7 +171,7 @@ public class Solver {
             	found = true; 
             	break; 
             }
-            if (map[r][c-1].equals(".")) {
+            if (map[r][c-1].equals(".")|| map[r][c-1].equals("|")) {
                 map[r][c-1] = "+";
                 stack.push(new int[]{r, c-1});
             }
@@ -182,6 +185,34 @@ public class Solver {
         if(found == false) {
         	System.out.println("No path found");
         }
+    }
+    
+    
+    public void opt() {
+        int[] start = findStart();
+        if (start == null) {
+            System.out.println("No start");
+            return;
+        }
+ 
+        int totalRows = map.length;
+        int totalCols = map[0].length;
+ 
+        int[][] previous = new int[totalRows][totalCols];
+        
+        
+        for (int r = 0; r < totalRows; r++) {
+            for (int c = 0; c < totalCols; c++) {
+                previous[r][c] = -1;
+            }
+        }
+ 
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(start);       
+        previous[start[0]][start[1]] = start[0] * totalCols + start[1];
+ 
+        boolean found = false;
+
     }
     
     
