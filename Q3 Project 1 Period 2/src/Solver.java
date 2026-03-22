@@ -43,11 +43,11 @@ public class Solver {
         return null;
     }
     
-    public void queue()  {
+    public boolean queue()  {
     	int[] start = findStart();
     	if(start == null) {
     		System.out.println("No start");
-    		return;
+    		return false;
     	}
     	
         Queue<int[]> queue = new LinkedList();
@@ -131,8 +131,10 @@ public class Solver {
         }
         
         if(found == false) {
-        	System.out.println("No path found");
+        	System.out.println("The Wolverine Store is closed.");
         }
+        
+        return found;
     
     }
     
@@ -141,11 +143,11 @@ public class Solver {
     
     
     
-    public void stack() {
+    public boolean stack() {
         int[] start = findStart();
       	if(start == null) {
     		System.out.println("No start");
-    		return;
+    		return false;
     	}
       	
       	
@@ -232,15 +234,17 @@ public class Solver {
         
         }
         if(found == false) {
-        	System.out.println("No path found");
+        	System.out.println("The Wolverine Store is closed.");
         }
+        return found;
+
     }
     
     
     
     
-    public void opt() {
-    	stack();
+    public boolean opt() {
+    	return stack();
         
 //i gave up :(   
 
@@ -265,13 +269,13 @@ public class Solver {
     
  
     public void printCoordinateMap() {
-        System.out.println(rows + " " + cols + " " + rooms);
         for (int r = 0; r < map.length; r++) {
             for (int c = 0; c < map[r].length; c++) {
-                if (map[r][c] != null && !map[r][c].equals(".")) {
+                if (map[r][c] != null && map[r][c].equals("+")) {
                     int room = r / rows;
                     int row  = r % rows;
-                    System.out.println(map[r][c] + " " + row + " " + c + " " + room);
+                    System.out.println("+ " + row + " " + c + " " + room);
+
                 }
             }
         }

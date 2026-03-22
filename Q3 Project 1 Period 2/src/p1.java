@@ -4,10 +4,10 @@ public class p1 {
 	public p1() {
 		
 	}
-
+ 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+ 
 		/*
 		ReadMap map;
 		try {
@@ -45,7 +45,7 @@ public class p1 {
                     break;
                 case "--Queue":
                     useQueue = true;
-
+ 
                     break;
                 case "--Opt":
                     useOpt = true;
@@ -57,7 +57,7 @@ public class p1 {
                     inCoordinate = true;
                     break;
                   
-                case "--outCoordinate":
+                case "--Outcoordinate":
                     outCoordinate = true;
                     break;
                 case "--Help":
@@ -127,28 +127,33 @@ public class p1 {
             );
  
             long startTime = System.nanoTime();
+            
+            boolean found = false;
 
+ 
             if (useQueue) {
-                solver.queue();
+               found= solver.queue();
             } else if (useStack) {
-                solver.stack();
+               found= solver.stack();
             } else if (useOpt) {
             
-                solver.queue();
+                found=solver.opt();
             }
             long endTime = System.nanoTime();
-
+ 
+            if(found) {
             if (outCoordinate) {
                 solver.printCoordinateMap();
             } else {
                 solver.printMap();
+            }
             }
             
             if (useTime) {
                 double seconds = (endTime - startTime) / 1_000_000_000.0;
                 System.out.println("Total Runtime: " + seconds + " seconds");
             }
-
+ 
  
         } catch (MazeException.IllegalFirstLineException e) {
             System.err.println("Map format error: " + e.getMessage());
