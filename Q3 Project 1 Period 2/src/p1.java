@@ -1,5 +1,9 @@
 
 public class p1 {
+	
+	public p1() {
+		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -23,49 +27,98 @@ public class p1 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	*/
-		
-        if (args.length < 2) {
-            throw new MazeException.IllegalCommandLineException(
-                "illegal command line");
-        }
-        
+*/       
         
         boolean useStack = false;
         boolean useQueue = false;
-        boolean useOpt   = false;
-        int switchCount  = 0;
+        boolean useOpt = false;
+        boolean useTime = false;
+        boolean inCoordinate = false;
+        boolean outCoordinate = false;
+        String  mapFile = null;
         
         for (int i=0; i<args.length-1; i++) {
             switch (args[i]) {
                 case "--Stack":
                     useStack = true;
-                    switchCount++;
+     
                     break;
                 case "--Queue":
                     useQueue = true;
-                    switchCount++;
+
                     break;
                 case "--Opt":
                     useOpt = true;
-                    switchCount++;
                     break;
+                case "--Time":
+                    useTime = true;
+                    break;
+                case "--Incoordinate":
+                    inCoordinate = true;
+                    break;
+                  
+                case "--outCoordinate":
+                    outCoordinate = true;
+                    break;
+                case "--Help":
+                    System.out.println("Maze Solver");
+                    System.out.println("Usage: java p1 [switches] <mapfile>");
+                    System.out.println("  --Stack: Use stack-based approach");
+                    System.out.println("  --Queue: Use queue-based approach");
+                    System.out.println("  --Opt: Find the shortest path");
+                    System.out.println("  --Time: Print the runtime of the search algorithm");
+                    System.out.println("  --Incoordinate: Input file is in coordinate-based format");
+                    System.out.println("  --Outcoordinate: Output in coordinate-based format");
+                    System.out.println("  --Help: Print this help message");
+                    System.out.println("Exactly one of --Stack, --Queue, or --Opt must be specified.");
+                    System.exit(0);
                 default:
-                    throw new MazeException.IllegalCommandLineException(
-                        "Unknown argument: " + args[i]);
+                    if (i == args.length - 1) {
+                        mapFile = args[i];
+                    } else {
+                        System.err.println("Error: Unknown argument: " + args[i]);
+                        System.exit(-1);
+                    }
             }
         }
  
  
-        if (switchCount != 1) {
-            throw new MazeException.IllegalCommandLineException(
-                "Exactly one switch must be specified.");
+        if (args.length > 0 && mapFile == null) {
+        	mapFile = args[args.length - 1];
+        }
+        
+        
+        int modeCount = 0;
+        if (useStack){
+        	modeCount++;
+        }
+        if (useQueue) {
+        	modeCount++;
+        }
+        if (useOpt) {
+        	modeCount++;
         }
  
-        String mapFile = args[args.length - 1];
- 
+        
+        if (modeCount != 1) {
+            System.err.println("Exactly one of --Stack, --Queue, or --Opt must be specified.");
+            System.exit(-1);
+        }
+        
+        if (mapFile == null) {
+            System.err.println("No map file specified.");
+            System.exit(-1);
+        }
+        
+        
         try {
-            ReadMap readMap = new ReadMap(mapFile);
+            ReadMap readMap;
+            if (inCoordinate) {
+                readMap = new ReadMap(mapFile, true);
+            } else {
+                readMap = new ReadMap(mapFile, false);
+            }
+ 
             Solver solver = new Solver(
                 readMap.getMap(),
                 readMap.getRows(),
@@ -73,6 +126,8 @@ public class p1 {
                 readMap.getRooms()
             );
  
+            long startTime = System.nanoTime();
+
             if (useQueue) {
                 solver.queue();
             } else if (useStack) {
@@ -81,8 +136,19 @@ public class p1 {
             
                 solver.queue();
             }
- 
-            solver.printMap();
+            long endTime = System.nanoTime();
+
+            if (outCoordinate) {
+                solver.printCoordinateMap();
+            } else {
+                solver.printMap();
+            }
+            
+            if (useTime) {
+                double seconds = (endTime - startTime) / 1_000_000_000.0;
+                System.out.println("Total Runtime: " + seconds + " seconds");
+            }
+
  
         } catch (MazeException.IllegalFirstLineException e) {
             System.err.println("Map format error: " + e.getMessage());
